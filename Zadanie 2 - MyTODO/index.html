@@ -1,11 +1,77 @@
 <!DOCTYPE html>
 <html>
- <head>
-   <link rel="stylesheet" 
-type="text/css" href="theme.css">
+
+<head>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <link rel="stylesheet" type="text/css" href="theme.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"></script>
    <script src="scripts.js"></script>
-<title>MyTODO App</title>
- </head>
- <body>
- </body>
+
+   <title>MyTODO App</title>
+</head>
+
+<body>
+   <h1>TO DO</h1>
+   <div class="container" id="forms">
+      <form class="form-group">
+         <div class="form-group">
+            <div class="col-sm-6">
+               <label for="inputTitle">Title</label>
+               <input class="form-control" type="text" id="inputTitle" />
+            </div>
+            <div class="col-sm-6">
+               <label for="inputDescription">Description</label>
+               <input class="form-control" type="text" id="inputDescription" />
+            </div>
+         </div>
+         <div class="form-group">
+            <label for="inputPlace">Place</label>
+            <input class="form-control" type="text" id="inputPlace" />
+         </div>
+         <div class="form-group">
+            <label for="inputDate">Due date</label>
+            <input class="form-control" type="date" id="inputDate" />
+         </div>
+         <button class="btn btn-success" type="button" onclick="addTodo()">add</button>
+      </form>
+      <div class="container" id="searchForms">
+         <form class="form-inline">
+            <div class="form-group">
+               <label for="inputSearch">Search</label>
+               <input class="form-control" type="text" id="inputSearch" />
+            </div>
+            <div class="form-group">
+               <label for="inputSearch">Data początkowa</label>
+               <input class="form-control" type="date" id="inputSearchDate1" />
+            </div>
+            <div class="form-group">
+               <label for="inputSearch">Data końcowa</label>
+               <input class="form-control" type="date" id="inputSearchDate2" />
+            </div>
+            <button class="btn button" type="button" onclick="updateTodoList()">Szukaj</button>
+            <button class="btn button" type="button" onclick="clearFilters()">Wyczyść</button>
+         </form>
+      </div>
+   </div>
+   <div class="container">
+      <div class="table-responsive">
+         <table class="table table-dark table-striped " id="todoListView">
+            <tr>
+               <th class="col-5">Name</th>
+               <th class="col-3">Description</th>
+               <th class="col-2">Date</th>
+               <th class="col-2">Place</th>
+               <th class="deleteColumn col-1"></th>
+            </tr>
+         </table>
+      </div>
+   </div>
+</body>
+
 </html>
+
+<!-- TODO
+ -->
