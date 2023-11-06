@@ -72,7 +72,7 @@ let updateTodoList = function () {
 
             //delete button
             let newDeleteButton = $("<button>").text("x").attr("class", "btn btn-danger");
-            newDeleteButton[0].addEventListener("click",
+            newDeleteButton.on("click",
                 function () {
                     deleteTodo(todo);
                 });
@@ -115,14 +115,14 @@ let convertStringToDate = function (inputDateString) {
     if (inputDateString === null) {
         return null;
     }
-    var parts = inputDateString.split('.'); // Split the input string into parts using dot as the delimiter
+    var parts = inputDateString.split('.'); 
     if (parts.length === 3) {
-        var day = parseInt(parts[0], 10); // Parse day as an integer
-        var month = parseInt(parts[1], 10) - 1; // Parse month as an integer (months in JavaScript Date object are 0-indexed)
-        var year = parseInt(parts[2], 10); // Parse year as an integer
-        return new Date(year, month, day); // Create a new Date object (year, month, day)
+        var day = parseInt(parts[0]); 
+        var month = parseInt(parts[1]) - 1; 
+        var year = parseInt(parts[2]); 
+        return new Date(year, month, day); 
     } else {
-        return null; // Invalid input format
+        return null; 
     }
 };
 
