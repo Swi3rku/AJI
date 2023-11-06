@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 let todoList = [];
 
 
@@ -39,19 +39,15 @@ let updateJSONbin = function () {
             console.log(err.responseJSON);
         }
     });
-}
+};
 
 
 
 let updateTodoList = function () {
     let todoListTable = $("#todoListView");
-    // remove all elements
-    // while (todoListTable.firstChild) {
-    //     todoListTable.removeChild(todoListTable.firstChild);
-    // }
-    // var rowCount = todoListTable[0].rows.length;
-    var rowCount = todoListTable.find('tr').length;
 
+    // remove all elements
+    var rowCount = todoListTable.find('tr').length;
     for (var i = rowCount - 1; i > 0; i--) {
         todoListTable[0].deleteRow(i);
     }
@@ -61,11 +57,10 @@ let updateTodoList = function () {
     let filterInputStartDate = new Date($('#inputSearchDate1').val());
     let filterInputEndDate = new Date($('#inputSearchDate2').val());
     for (let todo in todoList) {
-        // console.log();
         if (
             (filterInput === "" && isNaN(filterInputStartDate) && isNaN(filterInputEndDate)) ||
             ((todoList[todo].title.length > 0) && (todoList[todo].title.toLowerCase().includes(filterInput.toLowerCase())) ||
-                ((todoList[todo].description.length > 0) && todoList[todo].description.toLowerCase().includes(filterInput.toLowerCase()))) && 
+                ((todoList[todo].description.length > 0) && todoList[todo].description.toLowerCase().includes(filterInput.toLowerCase()))) &&
             ((isNaN(filterInputStartDate) || filterInputStartDate <= convertStringToDate(todoList[todo].dueDate)) &&
                 (isNaN(filterInputEndDate) || filterInputEndDate >= convertStringToDate(todoList[todo].dueDate)))
         ) {
@@ -83,41 +78,40 @@ let updateTodoList = function () {
                 });
             let delecteCell = $("<td>").attr("class", "deleteColumn");
             delecteCell.append(newDeleteButton);
+
             row.append(delecteCell);
         }
     }
-
-
-}
+};
 
 let addTodo = function () {
-    //get the elements in the form
+    //get the form inputs value 
     let inputTitle = $('#inputTitle').val();
     let inputDescription = $("#inputDescription").val();
     let inputPlace = $("#inputPlace").val();
     let inputDate = new Date($("#inputDate").val()).toLocaleDateString();
-
-    //create new item
-    let newTodo = {
-        title: inputTitle,
-        description: inputDescription,
-        place: inputPlace,
-        dueDate: inputDate
-    };
-    //add item to the list
-    todoList.push(newTodo);
-    updateJSONbin();
-    updateTodoList();
-    clearForm();
-}
+    if (inputDate !== "Invalid Date") {
+        //create new item
+        let newTodo = {
+            title: inputTitle,
+            description: inputDescription,
+            place: inputPlace,
+            dueDate: inputDate
+        };
+        //add item to the list
+        todoList.push(newTodo);
+        updateJSONbin();
+        updateTodoList();
+    }
+};
 
 let deleteTodo = function (index) {
     todoList.splice(index, 1);
     updateJSONbin();
     updateTodoList();
-}
+};
 
-function convertStringToDate(inputDateString) {
+let convertStringToDate = function (inputDateString) {
     if (inputDateString === null) {
         return null;
     }
@@ -130,18 +124,11 @@ function convertStringToDate(inputDateString) {
     } else {
         return null; // Invalid input format
     }
-}
+};
 
 let clearFilters = function () {
     $('#inputSearch').val("");
     $('#inputSearchDate1').val(null);
     $('#inputSearchDate2').val(null);
     updateTodoList();
-}
-
-let clearForm = function () {
-    $('#inputTitle').val("");
-    $("#inputDescription").val("");
-    $("#inputPlace").val("");
-    $("#inputDate").val(null);
-}
+};

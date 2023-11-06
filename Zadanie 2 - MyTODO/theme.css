@@ -19,11 +19,8 @@ tr {
 #todoListView {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    /* width: auto; */
     min-width: 1110px;
-    /* position: fixed; */
     overflow-y: auto;
-    margin-top: 50px;
 }
 
 .deleteColumn {
@@ -43,8 +40,25 @@ body {
     background-repeat: no-repeat;
 }
 
-#forms{
-    background-size: 210%;
-    background-color: rgba(255,255,255,0.8);
+#forms {
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 15px;
+    padding: 20px;
+}
+
+#searchForms {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+
+.btn-primary {
+    height: 40px;
+    margin: 10px;
+    margin-top: 30px;
 }
