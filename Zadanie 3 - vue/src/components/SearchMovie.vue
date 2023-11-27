@@ -27,6 +27,7 @@
 
 <script>
 export default {
+    emits: ['filterChanged'],
     data() {
         return {
             movieTitle: '', 

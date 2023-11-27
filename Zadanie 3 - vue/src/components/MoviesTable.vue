@@ -25,18 +25,14 @@
 <script>
 import SearchMovie from '@/components/SearchMovie.vue';
 import moviesData from '@/assets/movies.json';
-import _ from 'underscore';
 
-// const INITIAL_TABLE_SIZE = 10;
+var _ = require('lodash');
 let fMovies = [];
 
 export default {
+  emits: ['movieData'],
   data() {
-    // let tableRows = this.movies.length%INITIAL_TABLE_SIZE;
     let tableRows = 0;
-    // let tableRows = INITIAL_TABLE_SIZE;
-    // let tableRows = this.movies.length
-    // moviesLoaded: false;
     return {
       movies: [],
       tableRows,
@@ -56,15 +52,15 @@ export default {
   },
   methods: {
     loadMore() {
-      if (this.movies.length - this.tableRows < 10) {
-        this.tableRows += this.movies.length % 10;
-        console.log("test tableRow <10");
-        console.log(this.tableRows);
+      if (_.size(this.movies) - this.tableRows < 10) {
+        this.tableRows += _.size(this.movies) % 10;
+        // console.log("test tableRow <10");
+        // console.log(this.tableRows);
       } else {
         this.tableRows += 10;
-        console.log(this.tableRows);
+        // console.log(this.tableRows);
       }
-      if(this.tableRows == this.movies.length) {
+      if(this.tableRows == _.size(this.movies)) {
         this.isButtonDisabled = true;
       }
     },
@@ -72,7 +68,7 @@ export default {
       this.tableRows = 0;
       this.isButtonDisabled = false;
       this.filterCriteria = filter;
-      console.log(filter);
+      // console.log(filter);
       const { title, startYear, endYear, name } = this.filterCriteria;
 
       fMovies = _.filter(moviesData, function (movie) {
@@ -86,18 +82,17 @@ export default {
     },
     getMovies() {
       this.movies = [];
-      console.log(this.movies);
       if (this.filterCriteria.title === "" && this.filterCriteria.name === "" && this.filterCriteria.endYear === null && this.filterCriteria.startYear === null) {
-        console.log('brak filtrow');
+        // console.log('brak filtrow');
         this.movies = (this.moviesData);
         this.loadMore();
       } else {
-        console.log("filtry -> fmovies");
+        // console.log("filtry -> fmovies");
         this.movies = (fMovies);
         this.loadMore();
       }
-      console.log('movies.length: ', this.movies.length);
-      console.log(this.movies);
+      // console.log('movies.length: ', _.size(this.movies));
+      // console.log(this.movies);
     },
 
   },
@@ -106,14 +101,13 @@ export default {
 </script>
 
 <style scoped>
-/* Add your component-specific styles here */
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-/* th,
+th,
 td {
   border: 1px solid #ddd;
   padding: 8px;
@@ -122,5 +116,5 @@ td {
 
 th {
   background-color: #f2f2f2;
-} */
+} 
 </style>
